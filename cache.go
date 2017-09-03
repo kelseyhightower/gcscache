@@ -12,7 +12,7 @@
 // limitations under the License.
 
 // Package gcscache provides storage, backed by Google Cloud Storage,
-// for certificates managed by golang.org/x/crypto/acme/autocert package.
+// for certificates managed by the golang.org/x/crypto/acme/autocert package.
 //
 // This package is a work in progress and makes no API stability promises.
 
