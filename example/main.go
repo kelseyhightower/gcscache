@@ -36,10 +36,10 @@ func main() {
 		Cache:      cache,
 		Prompt:     autocert.AcceptTOS,
 		HostPolicy: autocert.HostWhitelist(domain),
-		Handler:    mux,
 	}
 	s := &http.Server{
 		Addr:      "0.0.0.0:443",
+		Handler:   mux,
 		TLSConfig: &tls.Config{GetCertificate: m.GetCertificate},
 	}
 

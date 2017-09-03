@@ -18,6 +18,7 @@ import (
 	"io/ioutil"
 
 	"cloud.google.com/go/storage"
+	"golang.org/x/crypto/acme/autocert"
 )
 
 type Cache struct {
@@ -32,13 +33,18 @@ func New(bucket, projectId string) (*Cache, error) {
 		return nil, err
 	}
 
-	c := &Cache{bucket, client, projectId}
+	c := &Cache{client, bucket, projectId}
 
 	return c, nil
 }
 
 func (c *Cache) Get(ctx context.Context, name string) ([]byte, error) {
 	r, err := c.client.Bucket(c.bucket).Object(name).NewReader(context.Background())
+
+	if err == storage.ErrObjectNotExist {
+		return nil, autocert.ErrCacheMiss
+	}
+
 	if err != nil {
 		return nil, err
 	}
@@ -54,5 +60,9 @@ func (c *Cache) Put(ctx context.Context, name string, data []byte) error {
 
 func (c *Cache) Delete(ctx context.Context, name string) error {
 	o := c.client.Bucket(c.bucket).Object(name)
-	return o.Delete(context.Background())
+	err := o.Delete(context.Background())
+	if err == storage.ErrObjectNotExist {
+		return nil
+	}
+	return err
 }
