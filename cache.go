@@ -15,7 +15,6 @@
 // for certificates managed by the golang.org/x/crypto/acme/autocert package.
 //
 // This package is a work in progress and makes no API stability promises.
-
 package gcscache
 
 import (
