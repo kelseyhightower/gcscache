@@ -19,7 +19,7 @@ import (
 )
 
 func main() {
-    cache, err := gcscache.New("bucket", "project")
+    cache, err := gcscache.New("bucket")
     if err != nil {
         log.Fatal(err)
     }
