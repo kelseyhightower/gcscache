@@ -21,6 +21,7 @@ import (
 	"golang.org/x/crypto/acme/autocert"
 )
 
+// Cache implements autocert.Cache using Google Cloud Storage.
 type Cache struct {
 	client    *storage.Client
 	bucket    string
@@ -38,6 +39,7 @@ func New(bucket, projectId string) (*Cache, error) {
 	return c, nil
 }
 
+// Get reads a certificate data from the specified object name.
 func (c *Cache) Get(ctx context.Context, name string) ([]byte, error) {
 	r, err := c.client.Bucket(c.bucket).Object(name).NewReader(context.Background())
 
@@ -52,12 +54,14 @@ func (c *Cache) Get(ctx context.Context, name string) ([]byte, error) {
 	return ioutil.ReadAll(r)
 }
 
+// Put writes the certificate data to the specified object name.
 func (c *Cache) Put(ctx context.Context, name string, data []byte) error {
 	w := c.client.Bucket(c.bucket).Object(name).NewWriter(context.Background())
 	w.Write(data)
 	return w.Close()
 }
 
+// Delete removes the specified object name.
 func (c *Cache) Delete(ctx context.Context, name string) error {
 	o := c.client.Bucket(c.bucket).Object(name)
 	err := o.Delete(context.Background())
