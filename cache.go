@@ -20,16 +20,15 @@ import (
 type Cache struct {
 	client    *storage.Client
 	bucket    string
-	projectID string
 }
 
-func New(bucket, projectId string) (*Cache, error) {
+func New(bucket string) (*Cache, error) {
 	client, err := storage.NewClient(context.Background())
 	if err != nil {
 		return nil, err
 	}
 
-	c := &Cache{client, bucket, projectId}
+	c := &Cache{client, bucket}
 
 	return c, nil
 }

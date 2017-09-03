@@ -17,16 +17,14 @@ import (
 var (
 	bucket  string
 	domain  string
-	project string
 )
 
 func main() {
 	flag.StringVar(&bucket, "bucket", "", "The GCS bucket.")
 	flag.StringVar(&domain, "domain", "", "The domain name to secure.")
-	flag.StringVar(&project, "project", "", "The GCP project ID.")
 	flag.Parse()
 
-	cache, err := gcscache.New(bucket, project)
+	cache, err := gcscache.New(bucket)
 	if err != nil {
 		log.Fatal(err)
 	}
