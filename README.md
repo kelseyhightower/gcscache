@@ -1,5 +1,7 @@
 # GCS Cache
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/kelseyhightower/gcscache)](https://goreportcard.com/report/github.com/kelseyhightower/gcscache) [![GoDoc](https://godoc.org/github.com/kelseyhightower/gcscache?status.svg)](https://godoc.org/github.com/kelseyhightower/gcscache)
+
 GCS Cache implements the [autocet.Cache](https://godoc.org/golang.org/x/crypto/acme/autocert#Cache) interface using [Google Cloud Storage](https://cloud.google.com/storage/).
 
 ## Example Usage
@@ -32,7 +34,7 @@ func main() {
     mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
         w.Write([]byte("Autocert with Google Cloud Storage Cache"))
     })
-    
+
     s := &http.Server{
         Addr:      "0.0.0.0:443",
         Handler:   mux,

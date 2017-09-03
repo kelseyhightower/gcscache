@@ -11,6 +11,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Package gcscache provides storage, backed by Google Cloud Storage,
+// for certificates managed by golang.org/x/crypto/acme/autocert package.
+//
+// This package is a work in progress and makes no API stability promises.
+
 package gcscache
 
 import (
@@ -21,7 +26,7 @@ import (
 	"golang.org/x/crypto/acme/autocert"
 )
 
-// Cache implements autocert.Cache using Google Cloud Storage.
+// Cache implements the autocert.Cache interface using Google Cloud Storage.
 type Cache struct {
 	client    *storage.Client
 	bucket    string
