@@ -22,6 +22,8 @@ type Cache struct {
 	bucket string
 }
 
+// New creates and initializes a new Cache backed by the given Google Cloud
+// Storage bucket.
 func New(bucket string) (*Cache, error) {
 	client, err := storage.NewClient(context.Background())
 	if err != nil {
