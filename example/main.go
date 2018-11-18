@@ -15,8 +15,8 @@ import (
 )
 
 var (
-	bucket  string
-	domain  string
+	bucket string
+	domain string
 )
 
 func main() {

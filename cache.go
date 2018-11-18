@@ -18,8 +18,8 @@ import (
 
 // Cache implements the autocert.Cache interface using Google Cloud Storage.
 type Cache struct {
-	client    *storage.Client
-	bucket    string
+	client *storage.Client
+	bucket string
 }
 
 func New(bucket string) (*Cache, error) {
